@@ -6,6 +6,7 @@ const url = process.env.REACT_APP_DATABASE_URL
 
 // request
 const request = method => async(endpoint, body) => {
+  console.log('THE METHOD', method)
   console.log('THE URL', url)
   console.log('THE ENDPOINT', endpoint)
   console.log('THE BODY', body)
@@ -16,10 +17,12 @@ const request = method => async(endpoint, body) => {
   }
 
   // send request
-  return axios
-    .get(`${url}/${endpoint}`, { method, body, headers })
-    .then(res => res.data)
-    
+  return await axios({
+    method: method,
+    headers: headers,
+    url: `${url}/${endpoint}`,
+    data: body
+  }).then(res => res.data)
 }
 
 export const get = request('GET')

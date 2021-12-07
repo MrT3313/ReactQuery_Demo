@@ -8,7 +8,7 @@
 
 2. Run Migration On Docker Container
 
-`docker exec reactquery_demo-backend-1 npm run migrate`
+`docker exec reactquery_demo-server-1 npm run migrate`
 
 3. Configure PGAdmin
 

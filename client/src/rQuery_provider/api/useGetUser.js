@@ -1,20 +1,19 @@
 import { useQuery } from "react-query";
 import { get } from "../../request";
 
-const useGetUser = () => {
+const useGetUser = (key, id) => {
 	return useQuery(
-		"users",				// this is the unique key
-		async () => {		// this is the "fetcher" function
+		[key, id],				// this is the unique key
+		async () => {		    // this is the "fetcher" function
 			try {
-				return get(`user`);
+				return get(`userById?userId=${id}`);
 			} catch (e) {
 				console.error(e);
 			}
 		},
-		{
-			// TODO: when BE is mature change this to timed value and refetch
-			staleTime: Infinity,
-			// enabled: false
+		{	
+      // -- set enabled query only when id is present -- //
+      enabled: !!id
 		}
 	);
 };

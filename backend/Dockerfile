@@ -1,6 +1,6 @@
 FROM node:17
 
-WORKDIR /backend
+WORKDIR /server
 
 # copy everything from local backend dir
 # into your current working directory in

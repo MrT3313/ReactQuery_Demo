@@ -1,7 +1,15 @@
 version: '3.8'
 
 services:
-  backend: 
+  client:
+    build: client
+    volumes:
+      - ./client:/client
+    ports:
+      - '3000:3000'
+    depends_on:
+      - server
+  server: 
     build: ./backend
     ports: 
       - '8080:8080'

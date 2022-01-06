@@ -1,5 +1,6 @@
 # React Query Demo
 
+> NODE: 17.3
 ## Startup
 
 1. Compose Docker Container

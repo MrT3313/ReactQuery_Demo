@@ -4,7 +4,7 @@ import { post } from '../request'
 import { 
   Flex, 
 } from 'mrt-components'
-import QueryStatus from './QueryStatus'
+import QueryStatus from './queryStatus'
 import UserCount from './UserCount'
 
 // react router

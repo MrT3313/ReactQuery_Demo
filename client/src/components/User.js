@@ -2,7 +2,7 @@
 import { 
   Flex, 
 } from 'mrt-components'
-import QueryStatus from './QueryStatus'
+import QueryStatus from './queryStatus'
 
 // react router
 import { useParams } from 'react-router-dom'

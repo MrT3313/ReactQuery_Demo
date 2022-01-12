@@ -2,14 +2,11 @@ FROM node:17.3
 
 WORKDIR /server
 
-# copy everything from local backend dir
-# into your current working directory in
-# the container: /backend
-COPY . .
-
-# install dependencies in the container
-# the .dockerignore does not copy the 
-# node_modules || Dockerfile itself
+COPY package.json ./package.json
 RUN npm i
+
+COPY index.js ./index.js
+COPY db ./db
+COPY api ./api
 
 CMD ["npm", "run", "dev"]

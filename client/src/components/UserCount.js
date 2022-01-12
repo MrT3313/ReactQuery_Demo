@@ -4,7 +4,7 @@ import {
 } from 'mrt-components'
 
 // rQuery
-import { api } from '../rQuery_provider'
+import { api } from '../rQuery'
 
 const UserCount = () => {
   // hooks

@@ -12,8 +12,8 @@ import { Link } from 'react-router-dom'
 
 // rQuery
 import { useMutation } from 'react-query'
-import { api } from '../rQuery_provider'
-import { queryClient } from '../rQuery_provider'
+import { api } from '../rQuery'
+import { queryClient } from '../rQuery'
 
 const Users = () => {
   // state 

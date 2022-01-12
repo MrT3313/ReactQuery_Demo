@@ -12,7 +12,7 @@ import { User } from './components';
 // rQuery
 import { QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from "react-query/devtools";
-import { queryClient } from './rQuery_provider'
+import { queryClient } from './rQuery'
 
 ReactDOM.render(
   <React.StrictMode>

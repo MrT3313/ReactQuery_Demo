@@ -8,7 +8,7 @@ import QueryStatus from './queryStatus'
 import { useParams } from 'react-router-dom'
 
 // rQuery
-import { api } from '../rQuery_provider'
+import { api } from '../rQuery'
 
 const User = () => {
   // hooks

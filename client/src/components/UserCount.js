@@ -18,15 +18,17 @@ const UserCount = () => {
     refetch: refetchUseGetUsers
   } = api.useGetUsers()
   return (
-    isSuccess ? (
-      <Flex marginRight="10px">
-        {`There are ${users.length} users 🎉`}
-      </Flex>    
-    ) : (
-      <Flex marginRight="10px">
-        {`I wonder how many users there are?🤔`}
-      </Flex>      
-    )
+    <Flex marginBottom="10px">
+      {isSuccess ? (
+        <Flex marginRight="10px">
+          {`There are ${users.length} users 🎉`}
+        </Flex>    
+      ) : (
+        <Flex marginRight="10px">
+          {`I wonder how many users there are?🤔`}
+        </Flex>      
+      )}
+    </Flex>
   )
 }
 

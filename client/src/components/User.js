@@ -2,7 +2,7 @@
 import { 
   Flex, 
 } from 'mrt-components'
-import QueryStatus from './queryStatus'
+import { QueryStatus } from '../components'
 
 // react router
 import { useParams } from 'react-router-dom'
@@ -20,11 +20,11 @@ const User = () => {
     isFetching,
     isSuccess,
     data: userData1
-  } = api.useGetUser('user', parseInt(id))
+  } = api.useGetUser(parseInt(id))
   
   const {
     data: userData2
-  } = api.useGetUser('user', parseInt(id))
+  } = api.useGetUser(parseInt(id))
 
   return (
     <Flex column>

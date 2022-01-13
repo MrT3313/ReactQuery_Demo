@@ -4,31 +4,30 @@ import { get } from "../../request";
 import { useQuery } from "react-query";
 import queryClient from '../queryClient';
 
-const useGetUsers = () => {
+const useGetUsers = (throwRandomErrors) => {
+	let endpoint = 'users'
+	if (throwRandomErrors && Math.random() > .33) endpoint = '_users'
+
 	return useQuery(
 		// unique key of the function
 		"users",									
 		// "fetcher" function
-		async () => {							
-			try {
-				// V1 - Standard Query
-				// return get(`users`);
+		async () => {				
+			// V1 - Standard Query
+			// return get(endpoint);
 
-				// V2 - Seed Future Queries (Push Mentality)
-				const users = await get(`users`)
-				users.forEach(user => {
-					queryClient.setQueryData(['user', user.id], user)
-				})
-				return users
-			} catch (e) {
-				console.error(e);
-			}
+			// V2 - Seed Future Queries (Push Mentality)
+			const users = await get(endpoint)
+			users.forEach(user => {
+				queryClient.setQueryData(['user', user.id], user)
+			})
+			return users
 		},
 		// query config
 		{					
 			// -- referch query when user refocuses on window -- //
 			// refetchOnWindowFocus: true, // DEFAULT
-			// refetchOnWindowFocus: false,
+			refetchOnWindowFocus: false,
 
 			// -- set how long it takes for a query to become "stale" -- //
 			// staleTime: 0, // DEFAULT - time in milliseconds
@@ -36,12 +35,12 @@ const useGetUsers = () => {
 			// staleTime: Infinity, // never becomes stale
 			
 			// -- set how long it takes for an inactive query to be garbage collected -- //
-			cacheTime: 0, // immedietly removed from cache			
+			// cacheTime: 0, // immedietly removed from cache			
 			cacheTime: 3000, // time in milliseconds
 			// cacheTime: Infinity, // never removed from the cache
 			
 			// -- set retries -- //
-			// retry: 3 // DEFAULT
+			retry: 3, // DEFAULT
 			
 			// -- set retry delay: uses exponential backoff by default -- // 
 			retryDelay: 1000, // time in milliseconds

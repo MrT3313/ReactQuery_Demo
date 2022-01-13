@@ -4,7 +4,6 @@ import { post } from '../request'
 import { 
   Flex, 
 } from 'mrt-components'
-import QueryStatus from './queryStatus'
 import UserCount from './UserCount'
 
 // react router
@@ -15,7 +14,9 @@ import { useMutation } from 'react-query'
 import { api } from '../rQuery'
 import { queryClient } from '../rQuery'
 
-const Users = () => {
+const Users = ({
+  throwRandomErrors
+}) => {
   // state 
   const [newName, setNewName] = useState('')
   // hooks
@@ -27,7 +28,7 @@ const Users = () => {
     isSuccess,
     data: users,
     refetch: refetchUseGetUsers
-  } = api.useGetUsers()
+  } = api.useGetUsers(throwRandomErrors)
 
   // mutations
   const { mutate: useAddUser } = useMutation(async (e) => {
@@ -50,14 +51,6 @@ const Users = () => {
 
   return(
     <>
-      <QueryStatus 
-        {...{
-          status,
-          isLoading,
-          isFetching,
-          isError,
-        }}
-      />
       <Flex justify="center" width="100%">
         <UserCount />
         <button
@@ -74,14 +67,14 @@ const Users = () => {
           <h3>The Users:</h3>
 
 
-          {(isLoading) ? 'Loading...' 
+          {isLoading ? 'Loading...' 
           : isError ? (
             error.message
           ) 
           : (
             <>
               {/* TODO: why cant i remove the optional chaining?  */}
-              {users?.map(user => {
+              {users.map(user => {
                 return (
                   <Flex
                     key={user.id}

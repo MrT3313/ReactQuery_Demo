@@ -5,36 +5,59 @@ import {
   Flex, 
   // Button 
 } from 'mrt-components'
-import { Users } from './components'
+import { DemoConfig, Users, QueryStatus } from './components'
+
+// rQuery
+import { api } from './rQuery'
 
 function App() {
   // state
   const [hideUsers, setHideUsers] = useState(false)
+  const [throwRandomErrors, setThrowRandomErrors] = useState(false)
 
-  // methods
-  const toggleHideUsers = () => {
-    setHideUsers(!hideUsers)
-  }
+  // hooks
+  const {
+    status,
+    isLoading,
+    isError, error, 
+    isFetching,
+    isSuccess,
+    data: users,
+    refetch: refetchUseGetUsers
+  } = api.useGetUsers()
 
   return (
     <>
-      <Flex width="100%">
+      <Flex width="100%" margin="10px 0">
         <Flex justify='center' width="100%"
           border='2px solid blue'
           borderRadius="5px"
         >
-          <div>REACT QUERY</div>
+          <div>REACT QUERY DEMO</div>
         </Flex>
       </Flex>
-      <Flex justify='center' width="100%">
-        <button
-          onClick={toggleHideUsers}
-        >
-          {hideUsers ? "Show Users" : "Hide Users"}
-        </button>
+      <Flex>
+        <DemoConfig 
+          {...{
+            throwRandomErrors, setThrowRandomErrors,
+            hideUsers, setHideUsers
+          }}
+        />
       </Flex>
+      <QueryStatus 
+        {...{
+          status,
+          isLoading,
+          isFetching,
+          isError,
+        }}
+      />
       {!hideUsers && 
-        <Users />
+        <Users 
+          {...{
+            throwRandomErrors
+          }}
+        />
       }
     </>
   );

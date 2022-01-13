@@ -29,11 +29,15 @@ function App() {
   return (
     <>
       <Flex width="100%" margin="10px 0">
-        <Flex justify='center' width="100%"
+        <Flex 
+          column
+          justify='center' 
+          width="100%"
           border='2px solid blue'
           borderRadius="5px"
         >
           <div>REACT QUERY DEMO</div>
+          <div>👀 Throttle your network speed to better see lifecycle 👀</div>
         </Flex>
       </Flex>
       <Flex>

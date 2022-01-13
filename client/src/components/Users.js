@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { post } from '../request'
+import { post, del } from '../request'
 // components
 import { 
   Flex, 
@@ -33,7 +33,7 @@ const Users = ({
   // mutations
   const { mutate: useAddUser } = useMutation(async (e) => {
     e.preventDefault()
-    const res = await post('users', {
+    await post('users', {
       name: newName
     })
   }, {
@@ -46,6 +46,13 @@ const Users = ({
     },
     onSettled: (data, err) => {
       console.log('we are totally done')
+    }
+  })
+  const {mutate: deleteUser } = useMutation(async (userId) => {
+    await del('user', { userId })
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"])
     }
   })
 
@@ -73,20 +80,26 @@ const Users = ({
           ) 
           : (
             <>
-              {/* TODO: why cant i remove the optional chaining?  */}
               {users.map(user => {
                 return (
                   <Flex
                     key={user.id}
                   >
-                    {/* <div>{user.name}-{user.id}</div> */}
                     <Link
                       to={{
                         pathname: `/user/${user.id}`
                       }}
                     >
-                    {user.name}-{user.id}
+                      {user.name}-{user.id}
                     </Link>
+                    <Flex
+                      cursor="pointer"
+                      marginLeft="10px"
+                      onClick={() => {
+                        console.log('DELETE USER', user.id)
+                        deleteUser(user.id)
+                      }}
+                    >❌</Flex>
                   </Flex>
                 )
               })}

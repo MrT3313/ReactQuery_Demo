@@ -55,10 +55,10 @@ server.post('/users', async (req, res) => {
 })
 
 // DELETE
-server.delete('/users', async (req, res) => {
+server.delete('/user', async (req, res) => {
   try {
     await db('users')
-      .where('name', req.body.name)
+      .where('id', req.body.userId)
       .del()
     res.json("success")
   } catch (err) {

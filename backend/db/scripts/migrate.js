@@ -4,7 +4,7 @@ const db = require('../index')
   try {
     await db.schema.dropTableIfExists('users')
     await db.schema.createTable('users', (table) => {
-      table.increments()
+      table.increments('id')
       table.string('name')
     })
     console.log('Created users table!')
